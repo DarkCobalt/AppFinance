@@ -220,3 +220,6 @@ Vagrantfile
 
 # PyCharm
 .idea
+
+# Virtualenv
+.env
