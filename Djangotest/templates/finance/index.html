@@ -44,9 +44,5 @@ var chart_data = {{ chart|safe }}
 </script>
 {% endblock %}
 {% block content %}
-<form action="/" method="post">{% csrf_token %}
- {{ form }}
-<input type="submit" value="Submit" />
-</form>
 <div id='container'></div>
 {% endblock %}
