@@ -1,6 +1,4 @@
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
-from pprint import pprint
+from django.http import HttpResponse
 from yahoo_finance import Share
 from django.shortcuts import render
 from forms import Date
@@ -17,8 +15,10 @@ def index(request):
     if request.method == 'POST':
         form = Date(request.POST)
         if form.is_valid():
-            g = yahoo.get_historical(form.start, form.end)
-            return HttpResponseRedirect('/thanks/', g)
+            date_start = form.cleaned_data['start']
+            date_end = form.cleaned_data['end']
+            g = yahoo.get_historical(date_start, date_end)
+            return HttpResponse(g)
     else:
         form = Date()
 
