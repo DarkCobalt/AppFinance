@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block extrahead %}
+<script src="{% static 'js/highstock.js'  %}"></script>
+<script type="text/javascript">
+    $(function() {
+        $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlc.json&callback=?', function(data) {
+            console.log(data)
+            // create the chart
+            $('#container').highcharts('StockChart', {
+
+
+                rangeSelector : {
+                    inputEnabled: $('#container').width() > 480,
+                    selected : 1
+                },
+
+                title : {
+                    text : 'Notowania'
+                },
+
+                series : [{
+                    type : 'candlestick',
+                    name : 'Notowania',
+                    data : data,
+                    dataGrouping : {
+                        units : [
+                            ['week', // unit name
+                            [1] // allowed multiples
+                        ], [
+                            'month',
+                            [1, 2, 3, 4, 6]]
+                        ]
+                    }
+                }]
+            });
+        });
+    });
+</script>
+{% load chartit %}
+{% endblock %}
+{% block content %}
+    {{ g }}
+<form action="/" method="post">{% csrf_token %}
+ {{ form }}
+<input type="submit" value="Submit" />
+</form>
+
+<div id='container'> Chart will be rendered here </div>
+{% endblock %}
