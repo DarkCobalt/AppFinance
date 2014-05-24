@@ -5,20 +5,17 @@ from forms import Date
 
 # Create your views here.
 
-LIST = {
-    ('YHOO', 'Yahoo'),
-    ('GOOGL', 'Google'),
-}
 
 def index(request):
-    yahoo = Share('YHOO')
     if request.method == 'POST':
         form = Date(request.POST)
         if form.is_valid():
             date_start = form.cleaned_data['start']
             date_end = form.cleaned_data['end']
-            g = yahoo.get_historical(date_start, date_end)
-            return HttpResponse(g)
+            ticker = form.cleaned_data['tickers']
+            share = Share(ticker)
+            respond = share.get_historical(date_start, date_end)
+            return HttpResponse(respond)
     else:
         form = Date()
 
