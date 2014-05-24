@@ -1,0 +1,6 @@
+Django==1.6.5
+django-chartit==0.1
+pytz==2014.3
+simplejson==3.5.2
+wsgiref==0.1.2
+yahoo-finance==1.0.2
