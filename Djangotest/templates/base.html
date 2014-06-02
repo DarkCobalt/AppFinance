@@ -40,7 +40,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <form action="/" method="post" class="navbar-form navbar-right" role="form">
-                <input type="hidden" name="csrfmiddlewaretoken" value="PtPo4qwu6Cnh2PwYVxTjbivD8BMGhU7x">
+                {% csrf_token %}
                 <label for="id_tickers">Symbol</label>
                 <select id="id_tickers" name="tickers" class="form-control">
                 <option value="YHOO" selected="selected">Yahoo</option>
